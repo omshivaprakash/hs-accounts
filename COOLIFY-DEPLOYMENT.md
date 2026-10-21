@@ -61,6 +61,11 @@ EOF
 docker compose -f docker-compose.coolify.yml config -q
 ```
 
+**Note:** For the watcher/bot services, `env_file: .env` was removed because `.env` is
+gitignored. Environment variables are now set directly via `environment:` in the compose
+file with defaults (e.g. `TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}`). Set their values
+in the Coolify UI under the app's Environment Variables.
+
 ## Database, migrations and schema changes
 
 **Nothing runs automatically on deploy, and nothing changed with the move to Coolify.**
