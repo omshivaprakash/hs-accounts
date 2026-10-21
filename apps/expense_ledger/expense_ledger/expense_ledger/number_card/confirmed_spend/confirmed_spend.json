@@ -1,0 +1,20 @@
+{
+ "creation": "2026-10-21 17:30:00.000000",
+ "docstatus": 0,
+ "idx": 0,
+ "modified": "2026-10-21 17:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Expense Ledger",
+ "owner": "Administrator",
+ "doctype": "Number Card",
+ "name": "Confirmed Spend",
+ "label": "Confirmed Spend",
+ "type": "Document Type",
+ "document_type": "Bill",
+ "function": "Sum",
+ "filters_json": "[[\"Bill\", \"docstatus\", \"=\", 1, false]]",
+ "is_public": 1,
+ "is_standard": 1,
+ "show_percentage_stats": 0,
+ "aggregate_function_based_on": "grand_total"
+}

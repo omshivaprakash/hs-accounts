@@ -14,7 +14,8 @@ case "${1:-}" in
   ingest)  dc up -d --build watcher ;;
   bot)     dc up -d --build bot ;;
   migrate) dc exec backend bench --site frontend migrate ;;
+  restart) dc restart backend queue scheduler ;;
   logs)    dc logs -f --tail=100 "${@:2}" ;;
   down)    dc --profile ingest --profile telegram down ;;
-  *)       echo "usage: $0 up | keys | ingest | bot | migrate | logs [service] | down"; exit 1 ;;
+  *)       echo "usage: $0 up | keys | ingest | bot | migrate | restart | logs [service] | down"; exit 1 ;;
 esac

@@ -12,6 +12,8 @@ x-frappe: &frappe
   volumes:
     - sites:/home/frappe/frappe-bench/sites
     - logs:/home/frappe/frappe-bench/logs
+    # app code lives in a volume so in-app upgrades survive container recreation
+    - app-code:/home/frappe/frappe-bench/apps/expense_ledger
 
 x-ingest: &ingest
   build:
@@ -128,3 +130,4 @@ volumes:
   sites:
   logs:
   db-data:
+  app-code:

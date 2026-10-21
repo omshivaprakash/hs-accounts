@@ -1,0 +1,162 @@
+{
+ "creation": "2026-10-21 17:30:00.000000",
+ "docstatus": 0,
+ "idx": 0,
+ "modified": "2026-10-21 17:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Expense Ledger",
+ "owner": "Administrator",
+ "doctype": "Workspace",
+ "name": "Expense Ledger",
+ "label": "Expense Ledger",
+ "title": "Expense Ledger",
+ "public": 1,
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "accounting",
+ "indicator_color": "blue",
+ "is_hidden": 0,
+ "parent_page": "",
+ "content": "[{\"id\": \"b000000000\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Overview</b></span>\", \"col\": 12}}, {\"id\": \"b000000001\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Bills Needing Review\", \"col\": 3}}, {\"id\": \"b000000002\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Draft Bills to Confirm\", \"col\": 3}}, {\"id\": \"b000000003\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Confirmed Bills\", \"col\": 3}}, {\"id\": \"b000000004\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Confirmed Spend\", \"col\": 3}}, {\"id\": \"b000000005\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Spend</b></span>\", \"col\": 12}}, {\"id\": \"b000000006\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Confirmed Spend by Month\", \"col\": 6}}, {\"id\": \"b000000007\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Confirmed Spend by Category\", \"col\": 6}}, {\"id\": \"b000000008\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Accounts and Admin</b></span>\", \"col\": 12}}, {\"id\": \"b000000009\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Bills\", \"col\": 3}}, {\"id\": \"b000000010\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Needs Review\", \"col\": 3}}, {\"id\": \"b000000011\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"GST Purchase Register\", \"col\": 3}}, {\"id\": \"b000000012\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Expense Categories\", \"col\": 3}}, {\"id\": \"b000000013\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Vendor Rules\", \"col\": 3}}, {\"id\": \"b000000014\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Journal Entry\", \"col\": 3}}, {\"id\": \"b000000015\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Payment Entry\", \"col\": 3}}, {\"id\": \"b000000016\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Purchase Invoice\", \"col\": 3}}, {\"id\": \"b000000017\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Chart of Accounts\", \"col\": 3}}, {\"id\": \"b000000018\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Cost Centers\", \"col\": 3}}, {\"id\": \"b000000019\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Assets\", \"col\": 3}}, {\"id\": \"b000000020\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Company\", \"col\": 3}}, {\"id\": \"b000000021\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Users\", \"col\": 3}}, {\"id\": \"b000000022\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Settings & Upgrade\", \"col\": 3}}]",
+ "links": [],
+ "number_cards": [
+  {
+   "label": "Bills Needing Review",
+   "number_card_name": "Bills Needing Review"
+  },
+  {
+   "label": "Draft Bills to Confirm",
+   "number_card_name": "Draft Bills to Confirm"
+  },
+  {
+   "label": "Confirmed Bills",
+   "number_card_name": "Confirmed Bills"
+  },
+  {
+   "label": "Confirmed Spend",
+   "number_card_name": "Confirmed Spend"
+  }
+ ],
+ "charts": [
+  {
+   "chart_name": "Confirmed Spend by Month",
+   "label": "Confirmed Spend by Month"
+  },
+  {
+   "chart_name": "Confirmed Spend by Category",
+   "label": "Confirmed Spend by Category"
+  }
+ ],
+ "shortcuts": [
+  {
+   "label": "Bills",
+   "link_to": "Bill",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Blue"
+  },
+  {
+   "label": "Needs Review",
+   "link_to": "Bill",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Orange",
+   "stats_filter": "{\"needs_review\": 1, \"docstatus\": 0}"
+  },
+  {
+   "label": "GST Purchase Register",
+   "link_to": "GST Purchase Register",
+   "type": "Report",
+   "color": "Green",
+   "report_ref_doctype": "Bill"
+  },
+  {
+   "label": "Expense Categories",
+   "link_to": "Expense Category",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Vendor Rules",
+   "link_to": "Vendor Category Rule",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Journal Entry",
+   "link_to": "Journal Entry",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Payment Entry",
+   "link_to": "Payment Entry",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Purchase Invoice",
+   "link_to": "Purchase Invoice",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Chart of Accounts",
+   "link_to": "Account",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Cost Centers",
+   "link_to": "Cost Center",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Assets",
+   "link_to": "Asset",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Company",
+   "link_to": "Company",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Users",
+   "link_to": "User",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Settings & Upgrade",
+   "link_to": "Expense Ledger Settings",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Red"
+  }
+ ],
+ "roles": [
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "System Manager"
+  }
+ ]
+}

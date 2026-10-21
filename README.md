@@ -19,7 +19,13 @@ Needs Docker with Compose v2.
 4. `scripts/dev.sh ingest` starts the folder watcher. Drop PDFs or images into `inbox/`. They move to `inbox/processed/` or `inbox/failed/` and are never deleted.
 5. Optional Telegram: create a bot with @BotFather, put the token and your chat ids in `.env`, then `scripts/dev.sh bot`. Send a bill to the bot; tap Business, Spam or Trash on the reply. Chats not in `TELEGRAM_ALLOWED_CHAT_IDS` are ignored.
 
-After editing the app, `scripts/dev.sh up` rebuilds, then `scripts/dev.sh migrate`.
+## Dashboard and upgrades
+
+Open **Expense Ledger** in the sidebar for the dashboard: counts of bills needing review, drafts to confirm, confirmed bills and spend, spend charts by month and category, and shortcuts to the register, categories, rules, the ERPNext accounting documents (journal, payment, purchase invoice, chart of accounts, cost centers, assets) and admin (company, users, settings).
+
+To upgrade: **Expense Ledger Settings** (System Manager only) > *Check for updates*, then *Upgrade now*. It downloads the latest commit of the configured GitHub repo and branch, overlays the app code, and runs `bench migrate`. Then run `scripts/dev.sh restart` so the running services load the new Python code. A private repo needs a read-only token in the same page. Use this page, not an image rebuild, to update a running system: the app code now sits in the `app-code` volume, which a rebuilt image does not overwrite. To start over from the image, `docker compose down`, remove the `*_app-code` volume (`docker volume ls`), then `scripts/dev.sh up`.
+
+Editing the app locally still works the same way: copy the changes into the running site with the upgrade page after pushing, or reset the volume as above.
 
 Tests: `pip install pytest && pytest`.
 
