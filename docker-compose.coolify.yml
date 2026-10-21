@@ -23,10 +23,11 @@ x-ingest: &ingest
     dockerfile: ingestion/Dockerfile
   image: expense-ledger-ingest
   restart: unless-stopped
-  env_file: .env
   environment:
     FRAPPE_URL: http://frontend:8080
     INBOX_DIR: /inbox
+    TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+    TELEGRAM_ALLOWED_CHAT_IDS: ${TELEGRAM_ALLOWED_CHAT_IDS:-}
   volumes:
     - ./inbox:/inbox
   depends_on: [frontend]
