@@ -18,6 +18,8 @@ class Bill(Document):
             self.needs_review = 1
         if self.vendor and not self.expense_category:
             self.suggest_classification()
+        if self.payment_mode == "Petty Cash" and self.petty_cash and not self.paid_by:
+            self.paid_by = frappe.db.get_value("Petty Cash Withdrawal", self.petty_cash, "custodian")
         self.warn_if_duplicate()
 
     def suggest_classification(self):
@@ -45,11 +47,25 @@ class Bill(Document):
             frappe.throw(_("Cannot confirm. Missing: {0}").format(", ".join(missing)))
         if self.disposition in ("Spam", "Trash"):
             frappe.throw(_("A bill marked {0} cannot be confirmed").format(self.disposition))
+        if self.payment_mode == "Petty Cash":
+            if not self.petty_cash:
+                frappe.throw(_("Pick the petty cash withdrawal this was paid from"))
+            balance = frappe.db.get_value("Petty Cash Withdrawal", self.petty_cash, "balance")
+            if self.grand_total > balance:
+                frappe.throw(_("{0} is more than the {1} left in {2}").format(self.grand_total, balance, self.petty_cash))
         self.disposition = "Business"
         self.needs_review = 0
 
     def on_submit(self):
         self.learn_rule()
+        self.refresh_petty_cash()
+
+    def on_cancel(self):
+        self.refresh_petty_cash()
+
+    def refresh_petty_cash(self):
+        if self.petty_cash:
+            frappe.get_doc("Petty Cash Withdrawal", self.petty_cash).save(ignore_permissions=True)  # validate recomputes the balance
 
     def learn_rule(self):
         pattern = self.vendor.strip().lower()

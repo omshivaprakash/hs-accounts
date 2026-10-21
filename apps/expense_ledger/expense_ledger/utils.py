@@ -66,3 +66,11 @@ def totals(net, cgst, sgst, igst, grand, tolerance=1.0):
         grand = round(net + tax, 2)
     consistent = bool(grand) and abs(net + tax - grand) <= tolerance
     return net, tax, grand, consistent
+
+
+def claim_groups(bills, by_category=False):
+    """Bucket bills by (payee, category); the category part is None unless by_category."""
+    groups = {}
+    for b in bills:
+        groups.setdefault((b["paid_by"], b["expense_category"] if by_category else None), []).append(b)
+    return groups

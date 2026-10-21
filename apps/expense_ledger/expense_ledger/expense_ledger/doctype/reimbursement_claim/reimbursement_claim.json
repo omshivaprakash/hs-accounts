@@ -1,0 +1,194 @@
+{
+ "creation": "2026-10-21 18:00:00.000000",
+ "modified": "2026-10-21 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Expense Ledger",
+ "owner": "Administrator",
+ "actions": [],
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "payee",
+  "period",
+  "category",
+  "settlement",
+  "bills_section",
+  "bills",
+  "total",
+  "financial_year",
+  "payment_section",
+  "approved_by",
+  "payment_status",
+  "paid_on",
+  "payment_reference",
+  "capital_contribution"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "hidden": 1,
+   "options": "CLM-.YYYY.-.#####",
+   "default": "CLM-.YYYY.-.#####",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "payee",
+   "fieldtype": "Link",
+   "label": "Payee",
+   "options": "Payee",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "period",
+   "fieldtype": "Date",
+   "label": "Month",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "description": "Any date in the month"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "label": "Category",
+   "options": "Expense Category",
+   "description": "Set when the claim was batched by category"
+  },
+  {
+   "fieldname": "settlement",
+   "fieldtype": "Select",
+   "label": "Settlement",
+   "options": "Reimburse\nCapital Contribution",
+   "default": "Reimburse",
+   "in_standard_filter": 1,
+   "description": "Capital Contribution turns the amount into the payee's contribution when approved instead of paying it back"
+  },
+  {
+   "fieldname": "bills_section",
+   "fieldtype": "Section Break",
+   "label": "Bills"
+  },
+  {
+   "fieldname": "bills",
+   "fieldtype": "Table",
+   "label": "Bills",
+   "options": "Claim Bill",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "financial_year",
+   "fieldtype": "Data",
+   "label": "Financial Year",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "Approval and Payment"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Data",
+   "label": "Approved By",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Select",
+   "label": "Payment Status",
+   "options": "Unpaid\nPaid\nNot Applicable",
+   "default": "Unpaid",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "paid_on",
+   "fieldtype": "Date",
+   "label": "Paid On",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "payment_reference",
+   "fieldtype": "Data",
+   "label": "Payment Reference",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "capital_contribution",
+   "fieldtype": "Link",
+   "label": "Capital Contribution",
+   "options": "Capital Contribution",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "name": "Reimbursement Claim",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "share": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "share": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1
+  },
+  {
+   "role": "Expense Accountant",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1
+  }
+ ],
+ "track_changes": 1,
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "is_submittable": 1,
+ "title_field": "payee"
+}

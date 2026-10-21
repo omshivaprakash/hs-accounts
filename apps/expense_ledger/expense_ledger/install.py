@@ -1,4 +1,5 @@
 import frappe
+from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
 # (name, is_capex, tds_possible). Draft list from the brief, still to be finalised.
 CATEGORIES = [
@@ -17,12 +18,30 @@ CATEGORIES = [
 ]
 
 
+def create_roles():
+    """Runs before the doctypes sync because their permissions refer to this role."""
+    if not frappe.db.exists("Role", "Expense Accountant"):
+        frappe.get_doc({"doctype": "Role", "role_name": "Expense Accountant", "desk_access": 1}).insert(ignore_permissions=True)
+
+
 def after_install():
+    setup()
+
+
+def setup():
+    """Idempotent: runs on install and from the migrate patch, so existing sites get new seed data too."""
+    create_roles()
     for name, is_capex, tds in CATEGORIES:
         if not frappe.db.exists("Expense Category", name):
             frappe.get_doc(
                 {"doctype": "Expense Category", "category_name": name, "is_capex": is_capex, "tds_possible": tds}
             ).insert(ignore_permissions=True)
+    if not frappe.db.exists("Payee", "Company"):
+        frappe.get_doc({"doctype": "Payee", "payee_name": "Company", "kind": "Company"}).insert(ignore_permissions=True)
+    # Data, not Link: a Link would stop the Capitalization being cancelled while its asset points back at it
+    create_custom_fields(
+        {"Asset": [{"fieldname": "capitalization", "label": "Capitalization Record", "fieldtype": "Data", "read_only": 1, "insert_after": "asset_name"}]}
+    )
 
 
 def make_api_keys(user="Administrator"):

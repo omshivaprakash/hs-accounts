@@ -4,22 +4,130 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "source_section", "github_repo", "branch", "github_token",
-  "status_section", "installed_version", "installed_commit", "latest_commit", "last_checked", "upgrade_status", "upgrade_started", "upgrade_log"
+  "source_section",
+  "github_repo",
+  "branch",
+  "github_token",
+  "tally_section",
+  "tally_company",
+  "input_cgst_ledger",
+  "input_sgst_ledger",
+  "input_igst_ledger",
+  "status_section",
+  "installed_version",
+  "installed_commit",
+  "latest_commit",
+  "last_checked",
+  "upgrade_status",
+  "upgrade_started",
+  "upgrade_log"
  ],
  "fields": [
-  {"fieldname": "source_section", "fieldtype": "Section Break", "label": "Upgrade Source"},
-  {"default": "omshivaprakash/hs-accounts", "fieldname": "github_repo", "fieldtype": "Data", "label": "GitHub Repository", "description": "owner/repo", "reqd": 1},
-  {"default": "main", "fieldname": "branch", "fieldtype": "Data", "label": "Branch", "reqd": 1},
-  {"description": "Only needed for a private repository. Read access to contents is enough.", "fieldname": "github_token", "fieldtype": "Password", "label": "GitHub Token"},
-  {"fieldname": "status_section", "fieldtype": "Section Break", "label": "Status"},
-  {"fieldname": "installed_version", "fieldtype": "Data", "label": "Installed Version", "read_only": 1},
-  {"fieldname": "installed_commit", "fieldtype": "Data", "label": "Installed Commit", "read_only": 1},
-  {"fieldname": "latest_commit", "fieldtype": "Data", "label": "Latest Commit", "read_only": 1},
-  {"fieldname": "last_checked", "fieldtype": "Datetime", "label": "Last Checked", "read_only": 1},
-  {"default": "Idle", "fieldname": "upgrade_status", "fieldtype": "Select", "label": "Upgrade Status", "options": "Idle\nRunning\nDone\nFailed", "read_only": 1},
-  {"fieldname": "upgrade_started", "fieldtype": "Datetime", "hidden": 1, "label": "Upgrade Started", "read_only": 1},
-  {"fieldname": "upgrade_log", "fieldtype": "Long Text", "label": "Upgrade Log", "read_only": 1}
+  {
+   "fieldname": "source_section",
+   "fieldtype": "Section Break",
+   "label": "Upgrade Source"
+  },
+  {
+   "default": "omshivaprakash/hs-accounts",
+   "fieldname": "github_repo",
+   "fieldtype": "Data",
+   "label": "GitHub Repository",
+   "description": "owner/repo",
+   "reqd": 1
+  },
+  {
+   "default": "main",
+   "fieldname": "branch",
+   "fieldtype": "Data",
+   "label": "Branch",
+   "reqd": 1
+  },
+  {
+   "description": "Only needed for a private repository. Read access to contents is enough.",
+   "fieldname": "github_token",
+   "fieldtype": "Password",
+   "label": "GitHub Token"
+  },
+  {
+   "fieldname": "tally_section",
+   "fieldtype": "Section Break",
+   "label": "Tally Export"
+  },
+  {
+   "fieldname": "tally_company",
+   "fieldtype": "Data",
+   "label": "Tally Company",
+   "description": "Company name exactly as it appears in Tally"
+  },
+  {
+   "fieldname": "input_cgst_ledger",
+   "fieldtype": "Data",
+   "label": "Input CGST Ledger",
+   "default": "Input CGST"
+  },
+  {
+   "fieldname": "input_sgst_ledger",
+   "fieldtype": "Data",
+   "label": "Input SGST Ledger",
+   "default": "Input SGST"
+  },
+  {
+   "fieldname": "input_igst_ledger",
+   "fieldtype": "Data",
+   "label": "Input IGST Ledger",
+   "default": "Input IGST"
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "fieldname": "installed_version",
+   "fieldtype": "Data",
+   "label": "Installed Version",
+   "read_only": 1
+  },
+  {
+   "fieldname": "installed_commit",
+   "fieldtype": "Data",
+   "label": "Installed Commit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "latest_commit",
+   "fieldtype": "Data",
+   "label": "Latest Commit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_checked",
+   "fieldtype": "Datetime",
+   "label": "Last Checked",
+   "read_only": 1
+  },
+  {
+   "default": "Idle",
+   "fieldname": "upgrade_status",
+   "fieldtype": "Select",
+   "label": "Upgrade Status",
+   "options": "Idle\nRunning\nDone\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "upgrade_started",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "Upgrade Started",
+   "read_only": 1
+  },
+  {
+   "fieldname": "upgrade_log",
+   "fieldtype": "Long Text",
+   "label": "Upgrade Log",
+   "read_only": 1
+  }
  ],
  "issingle": 1,
  "links": [],
@@ -29,7 +137,12 @@
  "name": "Expense Ledger Settings",
  "owner": "Administrator",
  "permissions": [
-  {"create": 1, "read": 1, "role": "System Manager", "write": 1}
+  {
+   "create": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",

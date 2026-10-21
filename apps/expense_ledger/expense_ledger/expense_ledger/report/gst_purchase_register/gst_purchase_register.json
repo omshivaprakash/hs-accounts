@@ -16,8 +16,17 @@
  "report_name": "GST Purchase Register",
  "report_type": "Script Report",
  "roles": [
-  {"role": "Accounts User"},
-  {"role": "Accounts Manager"},
-  {"role": "System Manager"}
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Expense Accountant"
+  }
  ]
 }

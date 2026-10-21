@@ -6,48 +6,265 @@
  "document_type": "Document",
  "engine": "InnoDB",
  "field_order": [
-  "naming_series", "vendor", "vendor_gstin", "invoice_no", "bill_date", "financial_year",
-  "payment_section", "payment_mode", "paid_by", "payment_reference", "entity",
-  "classification_section", "expense_category", "cost_center", "disposition", "tds_flag", "tds_amount",
-  "amounts_section", "net_amount", "cgst", "sgst", "igst", "total_tax", "grand_total",
-  "source_section", "source", "source_file", "ocr_confidence", "needs_review", "file_hash", "ocr_text"
+  "naming_series",
+  "vendor",
+  "vendor_gstin",
+  "invoice_no",
+  "bill_date",
+  "financial_year",
+  "payment_section",
+  "payment_mode",
+  "paid_by",
+  "payment_reference",
+  "petty_cash",
+  "entity",
+  "classification_section",
+  "expense_category",
+  "cost_center",
+  "disposition",
+  "tds_flag",
+  "tds_amount",
+  "amounts_section",
+  "net_amount",
+  "cgst",
+  "sgst",
+  "igst",
+  "total_tax",
+  "grand_total",
+  "links_section",
+  "claim",
+  "capitalization",
+  "source_section",
+  "source",
+  "source_file",
+  "ocr_confidence",
+  "needs_review",
+  "file_hash",
+  "ocr_text"
  ],
  "fields": [
-  {"default": "BILL-.YYYY.-.#####", "fieldname": "naming_series", "fieldtype": "Select", "hidden": 1, "label": "Series", "options": "BILL-.YYYY.-.#####", "reqd": 1, "set_only_once": 1},
-  {"fieldname": "vendor", "fieldtype": "Data", "in_list_view": 1, "in_standard_filter": 1, "label": "Vendor", "search_index": 1},
-  {"fieldname": "vendor_gstin", "fieldtype": "Data", "label": "Vendor GSTIN"},
-  {"fieldname": "invoice_no", "fieldtype": "Data", "in_list_view": 1, "label": "Invoice No", "search_index": 1},
-  {"fieldname": "bill_date", "fieldtype": "Date", "in_list_view": 1, "in_standard_filter": 1, "label": "Bill Date"},
-  {"fieldname": "financial_year", "fieldtype": "Data", "in_standard_filter": 1, "label": "Financial Year", "read_only": 1},
-
-  {"fieldname": "payment_section", "fieldtype": "Section Break", "label": "Payment"},
-  {"fieldname": "payment_mode", "fieldtype": "Select", "in_standard_filter": 1, "label": "Payment Mode", "options": "\nCorporate Card\nPersonal Card\nPersonal UPI\nBank Transfer\nPetty Cash"},
-  {"description": "Who actually paid", "fieldname": "paid_by", "fieldtype": "Data", "in_standard_filter": 1, "label": "Paid By"},
-  {"fieldname": "payment_reference", "fieldtype": "Data", "label": "Payment Reference"},
-  {"fieldname": "entity", "fieldtype": "Data", "in_standard_filter": 1, "label": "Entity"},
-
-  {"fieldname": "classification_section", "fieldtype": "Section Break", "label": "Classification"},
-  {"fieldname": "expense_category", "fieldtype": "Link", "in_list_view": 1, "in_standard_filter": 1, "label": "Expense Category", "options": "Expense Category"},
-  {"fieldname": "cost_center", "fieldtype": "Link", "label": "Cost Center", "options": "Cost Center"},
-  {"default": "Pending", "fieldname": "disposition", "fieldtype": "Select", "in_standard_filter": 1, "label": "Disposition", "options": "Pending\nBusiness\nSpam\nTrash"},
-  {"fetch_from": "expense_category.tds_possible", "fieldname": "tds_flag", "fieldtype": "Check", "label": "TDS May Apply", "read_only": 1},
-  {"fieldname": "tds_amount", "fieldtype": "Currency", "label": "TDS Amount"},
-
-  {"fieldname": "amounts_section", "fieldtype": "Section Break", "label": "Amounts"},
-  {"fieldname": "net_amount", "fieldtype": "Currency", "label": "Taxable Value"},
-  {"fieldname": "cgst", "fieldtype": "Currency", "label": "CGST"},
-  {"fieldname": "sgst", "fieldtype": "Currency", "label": "SGST"},
-  {"fieldname": "igst", "fieldtype": "Currency", "label": "IGST"},
-  {"fieldname": "total_tax", "fieldtype": "Currency", "label": "Total Tax", "read_only": 1},
-  {"fieldname": "grand_total", "fieldtype": "Currency", "in_list_view": 1, "label": "Invoice Total"},
-
-  {"collapsible": 1, "fieldname": "source_section", "fieldtype": "Section Break", "label": "Source Document"},
-  {"fieldname": "source", "fieldtype": "Select", "label": "Source", "options": "\nDrop Folder\nTelegram\nEmail\nManual"},
-  {"fieldname": "source_file", "fieldtype": "Attach", "label": "Original File"},
-  {"fieldname": "ocr_confidence", "fieldtype": "Percent", "label": "OCR Confidence", "read_only": 1},
-  {"fieldname": "needs_review", "fieldtype": "Check", "in_list_view": 1, "in_standard_filter": 1, "label": "Needs Review"},
-  {"fieldname": "file_hash", "fieldtype": "Data", "hidden": 1, "label": "File SHA-256", "read_only": 1, "unique": 1},
-  {"fieldname": "ocr_text", "fieldtype": "Long Text", "label": "OCR Text", "read_only": 1}
+  {
+   "default": "BILL-.YYYY.-.#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "BILL-.YYYY.-.#####",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "vendor",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Vendor",
+   "search_index": 1
+  },
+  {
+   "fieldname": "vendor_gstin",
+   "fieldtype": "Data",
+   "label": "Vendor GSTIN"
+  },
+  {
+   "fieldname": "invoice_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Invoice No",
+   "search_index": 1
+  },
+  {
+   "fieldname": "bill_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Bill Date"
+  },
+  {
+   "fieldname": "financial_year",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "Financial Year",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "Payment"
+  },
+  {
+   "fieldname": "payment_mode",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Payment Mode",
+   "options": "\nCorporate Card\nPersonal Card\nPersonal UPI\nBank Transfer\nPetty Cash"
+  },
+  {
+   "description": "Who actually paid",
+   "fieldname": "paid_by",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Paid By",
+   "options": "Payee"
+  },
+  {
+   "fieldname": "payment_reference",
+   "fieldtype": "Data",
+   "label": "Payment Reference"
+  },
+  {
+   "fieldname": "petty_cash",
+   "fieldtype": "Link",
+   "label": "Petty Cash",
+   "options": "Petty Cash Withdrawal",
+   "depends_on": "eval:doc.payment_mode=='Petty Cash'"
+  },
+  {
+   "fieldname": "entity",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "Entity"
+  },
+  {
+   "fieldname": "classification_section",
+   "fieldtype": "Section Break",
+   "label": "Classification"
+  },
+  {
+   "fieldname": "expense_category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Expense Category",
+   "options": "Expense Category"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "disposition",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Disposition",
+   "options": "Pending\nBusiness\nSpam\nTrash"
+  },
+  {
+   "fetch_from": "expense_category.tds_possible",
+   "fieldname": "tds_flag",
+   "fieldtype": "Check",
+   "label": "TDS May Apply",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tds_amount",
+   "fieldtype": "Currency",
+   "label": "TDS Amount"
+  },
+  {
+   "fieldname": "amounts_section",
+   "fieldtype": "Section Break",
+   "label": "Amounts"
+  },
+  {
+   "fieldname": "net_amount",
+   "fieldtype": "Currency",
+   "label": "Taxable Value"
+  },
+  {
+   "fieldname": "cgst",
+   "fieldtype": "Currency",
+   "label": "CGST"
+  },
+  {
+   "fieldname": "sgst",
+   "fieldtype": "Currency",
+   "label": "SGST"
+  },
+  {
+   "fieldname": "igst",
+   "fieldtype": "Currency",
+   "label": "IGST"
+  },
+  {
+   "fieldname": "total_tax",
+   "fieldtype": "Currency",
+   "label": "Total Tax",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Invoice Total"
+  },
+  {
+   "fieldname": "links_section",
+   "fieldtype": "Section Break",
+   "label": "Used In",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "claim",
+   "fieldtype": "Data",
+   "label": "Reimbursement Claim",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "capitalization",
+   "fieldtype": "Data",
+   "label": "Capitalization",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "source_section",
+   "fieldtype": "Section Break",
+   "label": "Source Document"
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Select",
+   "label": "Source",
+   "options": "\nDrop Folder\nTelegram\nEmail\nManual"
+  },
+  {
+   "fieldname": "source_file",
+   "fieldtype": "Attach",
+   "label": "Original File"
+  },
+  {
+   "fieldname": "ocr_confidence",
+   "fieldtype": "Percent",
+   "label": "OCR Confidence",
+   "read_only": 1
+  },
+  {
+   "fieldname": "needs_review",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Needs Review"
+  },
+  {
+   "fieldname": "file_hash",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "File SHA-256",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "ocr_text",
+   "fieldtype": "Long Text",
+   "label": "OCR Text",
+   "read_only": 1
+  }
  ],
  "is_submittable": 1,
  "links": [],
@@ -58,9 +275,50 @@
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
-  {"amend": 1, "cancel": 1, "create": 1, "delete": 1, "email": 1, "export": 1, "print": 1, "read": 1, "report": 1, "role": "System Manager", "share": 1, "submit": 1, "write": 1},
-  {"amend": 1, "cancel": 1, "create": 1, "export": 1, "print": 1, "read": 1, "report": 1, "role": "Accounts Manager", "share": 1, "submit": 1, "write": 1},
-  {"create": 1, "export": 1, "print": 1, "read": 1, "report": 1, "role": "Accounts User", "write": 1}
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "write": 1
+  },
+  {
+   "role": "Expense Accountant",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1
+  }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",

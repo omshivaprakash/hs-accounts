@@ -1,0 +1,32 @@
+{
+ "creation": "2026-10-21 18:00:00.000000",
+ "docstatus": 0,
+ "idx": 0,
+ "modified": "2026-10-21 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Expense Ledger",
+ "owner": "Administrator",
+ "add_total_row": 1,
+ "disabled": 0,
+ "doctype": "Report",
+ "is_standard": "Yes",
+ "name": "Expenses by Category",
+ "prepared_report": 0,
+ "ref_doctype": "Bill",
+ "report_name": "Expenses by Category",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Expense Accountant"
+  },
+  {
+   "role": "Accounts User"
+  }
+ ]
+}
