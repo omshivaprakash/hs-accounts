@@ -1,6 +1,6 @@
 # Coolify-compatible compose. It mirrors docker-compose.yml but with the
-# one change needed on THIS host: the frontend's published port is 8180
-# (127.0.0.1:8080 is already used by another app).
+# one change: the frontend is exposed to Coolify's proxy, not published on a host port.
+# In Coolify set the domain on the "frontend" service as https://your.domain:8080
 #
 # Build pack in Coolify: "Docker Compose", file: docker-compose.coolify.yml
 
@@ -25,6 +25,8 @@ x-ingest: &ingest
   restart: unless-stopped
   environment:
     FRAPPE_URL: http://frontend:8080
+    FRAPPE_API_KEY: ${FRAPPE_API_KEY:-}
+    FRAPPE_API_SECRET: ${FRAPPE_API_SECRET:-}
     INBOX_DIR: /inbox
     TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
     TELEGRAM_ALLOWED_CHAT_IDS: ${TELEGRAM_ALLOWED_CHAT_IDS:-}
@@ -125,8 +127,7 @@ services:
       UPSTREAM_REAL_IP_RECURSIVE: "off"
       PROXY_READ_TIMEOUT: "120"
       CLIENT_MAX_BODY_SIZE: 50m
-    ports:
-      - "127.0.0.1:8180:8080"
+    expose: ["8080"]  # Coolify's proxy routes the domain set on this service to port 8080
     depends_on: [backend, websocket]
 
   watcher:
