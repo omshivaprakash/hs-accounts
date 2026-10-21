@@ -1,0 +1,28 @@
+{
+ "actions": [],
+ "autoname": "field:category_name",
+ "creation": "2026-10-21 17:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["category_name", "is_capex", "tds_possible"],
+ "fields": [
+  {"fieldname": "category_name", "fieldtype": "Data", "in_list_view": 1, "label": "Category", "reqd": 1, "unique": 1},
+  {"fieldname": "is_capex", "fieldtype": "Check", "in_list_view": 1, "label": "Capex Item"},
+  {"description": "Flags bills in this category for the accountant to check TDS", "fieldname": "tds_possible", "fieldtype": "Check", "in_list_view": 1, "label": "TDS May Apply"}
+ ],
+ "links": [],
+ "modified": "2026-10-21 17:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Expense Ledger",
+ "name": "Expense Category",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {"create": 1, "delete": 1, "read": 1, "role": "System Manager", "write": 1},
+  {"create": 1, "read": 1, "role": "Accounts Manager", "write": 1},
+  {"read": 1, "role": "Accounts User"}
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
