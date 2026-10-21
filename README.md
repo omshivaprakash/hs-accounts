@@ -6,7 +6,7 @@ Bill capture, classification, reimbursements, a GST purchase register, Tally exp
 apps/expense_ledger/   Frappe app: bills, claims, petty cash, capital contributions, capitalizations, reports, Tally export
 ingestion/             OCR + parser, inbox watcher, Telegram bot (talks to Frappe over REST)
 docker-compose.yml     Local stack: ERPNext + app + watcher + bot
-tests/                 Parser, helpers, ingest pipeline
+tests/                 Parser, helpers, ingest pipeline, Tally export, upgrade safety, help docs
 ```
 
 ## Run locally
@@ -56,6 +56,19 @@ Roles: Accounts User enters bills and claims, Accounts Manager approves and pays
 - **Capitalization** gathers what went into a built product or IP: confirmed bills (raw materials, parts) plus free-form cost lines for in-house labour, with a narrative and an optional attached document. Submitting it creates and submits an ERPNext **Asset** for the total cost, linked back to the record, and marks the bills as capitalized so they cannot be used twice. Cancelling it cancels the asset and frees the bills.
 - **Capitalization rule (proposed default, still open):** a record can be submitted only once the product is ready and deployed to a location. The deployment date becomes the asset's available-for-use date. Costs default to each bill's taxable value because recoverable GST is not part of an asset's cost; edit the row if that is wrong for a bill.
 - The asset is created as an existing asset with no depreciation schedule. Set up the Asset Category (and an intangible one for IP) and Locations in ERPNext first.
+
+## Help and documentation
+
+The help is built into the system: open **Expense Ledger** in the sidebar and choose **Help**, then pick a topic from the dropdown. The topics are plain Markdown in `apps/expense_ledger/expense_ledger/docs/`. They ship with the app, so the in-app upgrade updates the help too, and the numeric file prefix sets their order. Edit them like any other file and they appear in the Help page after the next upgrade or restart.
+
+- [Getting started](apps/expense_ledger/expense_ledger/docs/01-getting-started.md): the routine, one-time setup and roles
+- [Bills](apps/expense_ledger/expense_ledger/docs/02-bills.md): how bills arrive, review and confirmation
+- [Claims and reimbursements](apps/expense_ledger/expense_ledger/docs/03-claims-and-reimbursements.md): monthly claims, approval and payment
+- [Petty cash](apps/expense_ledger/expense_ledger/docs/04-petty-cash.md): withdrawals and spending from them
+- [Capital contributions and assets](apps/expense_ledger/expense_ledger/docs/05-capital-and-assets.md): contributions and capitalizing built products or IP
+- [Reports and Tally](apps/expense_ledger/expense_ledger/docs/06-reports-and-tally.md): the reports and the Tally export steps
+- [Administration](apps/expense_ledger/expense_ledger/docs/07-administration.md): people, settings, upgrades and backups
+- [Troubleshooting](apps/expense_ledger/expense_ledger/docs/08-troubleshooting.md): common problems and fixes
 
 ## Built vs deferred
 

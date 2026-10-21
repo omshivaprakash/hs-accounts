@@ -74,3 +74,8 @@ def claim_groups(bills, by_category=False):
     for b in bills:
         groups.setdefault((b["paid_by"], b["expense_category"] if by_category else None), []).append(b)
     return groups
+
+
+def doc_title(markdown: str) -> str:
+    """Text of the first '# ' heading, used as the help topic title."""
+    return next((l[2:].strip() for l in markdown.splitlines() if l.startswith("# ")), "Untitled")
