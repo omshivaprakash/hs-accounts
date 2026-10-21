@@ -1,6 +1,6 @@
 # Coolify-compatible compose. It mirrors docker-compose.yml but with the
-# one change: the frontend is exposed to Coolify's proxy, not published on a host port.
-# In Coolify set the domain on the "frontend" service as https://your.domain:8080
+# one change on THIS host: the frontend is published on 127.0.0.1:8180
+# (8080 is taken) and the host's nginx proxies the public domain to it.
 #
 # Build pack in Coolify: "Docker Compose", file: docker-compose.coolify.yml
 
@@ -127,7 +127,8 @@ services:
       UPSTREAM_REAL_IP_RECURSIVE: "off"
       PROXY_READ_TIMEOUT: "120"
       CLIENT_MAX_BODY_SIZE: 50m
-    expose: ["8080"]  # Coolify's proxy routes the domain set on this service to port 8080
+    ports:
+      - "127.0.0.1:8180:8080"  # host nginx proxies the domain here (see COOLIFY-DEPLOYMENT.md)
     depends_on: [backend, websocket]
 
   watcher:
