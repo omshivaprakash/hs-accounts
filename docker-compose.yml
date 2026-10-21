@@ -1,4 +1,5 @@
 # Local stack: ERPNext (Frappe v15) with the expense_ledger app, plus the ingestion services.
+# All data (database, site files, logs) lives in ./data, see scripts/dev.sh up.
 # Adapted from frappe_docker's pwd.yml. Site name is "frontend"; UI on http://localhost:8080.
 
 x-frappe: &frappe
@@ -10,8 +11,8 @@ x-frappe: &frappe
   image: expense-ledger-frappe
   restart: unless-stopped
   volumes:
-    - sites:/home/frappe/frappe-bench/sites
-    - logs:/home/frappe/frappe-bench/logs
+    - ./data/sites:/home/frappe/frappe-bench/sites
+    - ./data/logs:/home/frappe/frappe-bench/logs
     # app code lives in a volume so in-app upgrades survive container recreation
     - app-code:/home/frappe/frappe-bench/apps/expense_ledger
 
@@ -39,7 +40,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-admin}
     volumes:
-      - db-data:/var/lib/mysql
+      - ./data/db:/var/lib/mysql
 
   redis-cache:
     image: redis:6.2-alpine
@@ -127,7 +128,4 @@ services:
     command: [python, -m, ingestion.bot]
 
 volumes:
-  sites:
-  logs:
-  db-data:
-  app-code:
+  app-code:  # code, not data: a bind mount would hide the app baked into the image

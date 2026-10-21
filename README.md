@@ -27,6 +27,8 @@ To upgrade: **Expense Ledger Settings** (System Manager only) > *Check for updat
 
 Editing the app locally still works the same way: copy the changes into the running site with the upgrade page after pushing, or reset the volume as above.
 
+Data (database, site files, logs) lives in `./data` inside the project and is git-ignored; back it up by copying that folder with the stack stopped.
+
 Tests: `pip install pytest && pytest`.
 
 ## How a bill flows

@@ -5,7 +5,14 @@ cd "$(dirname "$0")/.."
 dc() { docker compose "$@"; }
 
 case "${1:-}" in
-  up)      dc up -d --build ;;
+  up)
+    dc build backend
+    mkdir -p data/db data/logs data/sites
+    # an empty bind mount would hide the sites/ (assets, config) baked into the image, so seed it once
+    [ -e data/sites/apps.txt ] || docker run --rm --user root -v "$PWD/data/sites:/dest" expense-ledger-frappe \
+      bash -c 'cp -a sites/. /dest/ && chown -R 1000:1000 /dest /dest/.. 2>/dev/null; chown -R 1000:1000 /dest'
+    mkdir -p data/logs && chown -R 1000:1000 data/logs 2>/dev/null || true
+    dc up -d --build ;;
   keys)
     keys=$(dc exec -T backend bench --site frontend execute expense_ledger.install.make_api_keys | grep '^FRAPPE_API_') \
       || { echo "key generation failed; is the site up? (scripts/dev.sh logs create-site)"; exit 1; }
