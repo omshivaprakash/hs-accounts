@@ -12,11 +12,11 @@ Coolify app "hs-accounts"  (project: sok-remaster, build pack: dockercompose)
       |  build pack: dockercompose, file: docker-compose.coolify.yml
       v
   backend  container   host network, uvicorn on 127.0.0.1:8000
-  frontend container   nginx serving the ERPNext site, published on 127.0.0.1:8080
+  frontend container   nginx serving the ERPNext site, published on 127.0.0.1:8180
       ^
   host nginx (80/443, TLS from Let's Encrypt)
       /api/, websocket   -> 127.0.0.1:8000
-      everything else    -> 127.0.0.1:8080
+      everything else    -> 127.0.0.1:8180
 ```
 
 - **One compose file, one Coolify app, two services.** A push rebuilds and restarts both.
