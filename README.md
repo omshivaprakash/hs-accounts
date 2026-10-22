@@ -16,8 +16,12 @@ Needs Docker with Compose v2.
 1. `scripts/dev.sh up` and wait a few minutes. First start builds the image and creates the site. Watch with `scripts/dev.sh logs create-site`.
 2. Open http://localhost:8080, log in as `Administrator` / `admin` (set in `.env`), and finish the ERPNext setup wizard. A Company is needed before Cost Centers exist.
 3. `scripts/dev.sh keys` writes an API key and secret to `.env` (it uses Administrator; swap in a dedicated user later).
-4. `scripts/dev.sh ingest` starts the folder watcher. Drop PDFs or images into `inbox/`. They move to `inbox/processed/` or `inbox/failed/` and are never deleted.
+4. `scripts/dev.sh up` now also creates the API keys and starts the reader once the site is ready. The folder watcher runs with it. Drop PDFs or images into `inbox/`. They move to `inbox/processed/` or `inbox/failed/` and are never deleted.
 5. Optional Telegram: create a bot with @BotFather, put the token and your chat ids in `.env`, then `scripts/dev.sh bot`. Send a bill to the bot; tap Business, Spam or Trash on the reply. Chats not in `TELEGRAM_ALLOWED_CHAT_IDS` are ignored.
+
+## Drop a Bill
+
+The home screen (**Expense Ledger** in the sidebar) is deliberately small: **Drop a Bill**, bills needing review, bills, claims and help. Drag invoices or receipts onto the Drop a Bill page; each is OCR'd by the `watcher` service (which now also answers on an internal port 8090), a draft Bill is created with **Paid by** set to the uploader's Payee, and the card lets the person set how it was paid and the category. Managers can confirm on the spot. The full set of reports, ledgers and settings moved to the **Accounts Admin** workspace, visible to Accounts Manager, Expense Accountant and System Manager.
 
 ## Dashboard and upgrades
 

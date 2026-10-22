@@ -12,7 +12,10 @@ case "${1:-}" in
     [ -e data/sites/apps.txt ] || docker run --rm --user root -v "$PWD/data/sites:/dest" expense-ledger-frappe \
       bash -c 'cp -a sites/. /dest/ && chown -R 1000:1000 /dest /dest/.. 2>/dev/null; chown -R 1000:1000 /dest'
     mkdir -p data/logs && chown -R 1000:1000 data/logs 2>/dev/null || true
-    dc up -d --build ;;
+    dc up -d --build
+    # first run: wait for the site, make the API keys, then start the reader (watcher) with them
+    grep -q '^FRAPPE_API_KEY=.' .env || for i in $(seq 60); do "$0" keys 2>/dev/null && break; echo "waiting for the site ($i/60)..."; sleep 15; done
+    dc up -d watcher ;;
   keys)
     keys=$(dc exec -T backend bench --site frontend execute expense_ledger.install.make_api_keys | grep '^FRAPPE_API_') \
       || { echo "key generation failed; is the site up? (scripts/dev.sh logs create-site)"; exit 1; }

@@ -63,3 +63,25 @@ def test_failed_attach_leaves_no_orphan_bill(monkeypatch, bill_file):
     with pytest.raises(RuntimeError):
         run(monkeypatch, c, bill_file)
     assert c.bills == {} and bill_file.exists()
+
+
+def test_upload_server_reads_a_dropped_file_and_rejects_bad_types(monkeypatch):
+    import threading, urllib.error, urllib.request
+    from http.server import ThreadingHTTPServer
+    from ingestion import pipeline, server
+
+    seen = {}
+    monkeypatch.setattr(pipeline, "ingest", lambda c, p, src: seen.update(name=p.name, src=src, data=p.read_bytes()) or {"name": "BILL-1", "duplicate": False})
+    srv = ThreadingHTTPServer(("127.0.0.1", 0), server.make_handler(None))
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+
+    def post(name, body=b"x"):
+        req = urllib.request.Request(f"http://127.0.0.1:{srv.server_port}/ingest", data=body, headers={"X-Filename": name})
+        return urllib.request.urlopen(req)
+
+    assert post("../a%20b.pdf", b"pdf").status == 200
+    assert seen == {"name": "a b.pdf", "src": "Upload", "data": b"pdf"}  # path parts are stripped
+    with __import__("pytest").raises(urllib.error.HTTPError) as e:
+        post("virus.exe")
+    assert e.value.code == 400
+    srv.shutdown()

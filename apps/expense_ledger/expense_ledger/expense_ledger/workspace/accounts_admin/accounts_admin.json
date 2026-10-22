@@ -1,0 +1,207 @@
+{
+ "creation": "2026-10-21 18:00:00.000000",
+ "docstatus": 0,
+ "idx": 0,
+ "modified": "2026-10-21 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Expense Ledger",
+ "owner": "Administrator",
+ "doctype": "Workspace",
+ "name": "Accounts Admin",
+ "label": "Accounts Admin",
+ "title": "Accounts Admin",
+ "public": 1,
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "setting",
+ "indicator_color": "grey",
+ "is_hidden": 0,
+ "parent_page": "",
+ "content": "[{\"id\": \"a00001\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Accounts and admin</b></span>\", \"col\": 12}}, {\"id\": \"a00002\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Claims to Approve\", \"col\": 3}}, {\"id\": \"a00003\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Petty Cash\", \"col\": 3}}, {\"id\": \"a00004\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Capital Contributions List\", \"col\": 3}}, {\"id\": \"a00005\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Capitalizations\", \"col\": 3}}, {\"id\": \"a00006\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Payees\", \"col\": 3}}, {\"id\": \"a00007\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"GST Purchase Register\", \"col\": 3}}, {\"id\": \"a00008\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Reimbursement Voucher\", \"col\": 3}}, {\"id\": \"a00009\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Capital Contributions Report\", \"col\": 3}}, {\"id\": \"a00010\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Expenses by Category\", \"col\": 3}}, {\"id\": \"a00011\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Asset Register\", \"col\": 3}}, {\"id\": \"a00012\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Expense Categories\", \"col\": 3}}, {\"id\": \"a00013\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Vendor Rules\", \"col\": 3}}, {\"id\": \"a00014\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Journal Entry\", \"col\": 3}}, {\"id\": \"a00015\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Payment Entry\", \"col\": 3}}, {\"id\": \"a00016\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Purchase Invoice\", \"col\": 3}}, {\"id\": \"a00017\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Chart of Accounts\", \"col\": 3}}, {\"id\": \"a00018\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Cost Centers\", \"col\": 3}}, {\"id\": \"a00019\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Assets\", \"col\": 3}}, {\"id\": \"a00020\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Company\", \"col\": 3}}, {\"id\": \"a00021\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Users\", \"col\": 3}}, {\"id\": \"a00022\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Settings & Upgrade\", \"col\": 3}}, {\"id\": \"a00023\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Overview</b></span>\", \"col\": 12}}, {\"id\": \"a00024\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Confirmed Bills\", \"col\": 3}}, {\"id\": \"a00025\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Confirmed Spend\", \"col\": 3}}, {\"id\": \"a00026\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Petty Cash Balance\", \"col\": 3}}, {\"id\": \"a00027\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Spend</b></span>\", \"col\": 12}}, {\"id\": \"a00028\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Confirmed Spend by Month\", \"col\": 6}}, {\"id\": \"a00029\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Confirmed Spend by Category\", \"col\": 6}}]",
+ "links": [],
+ "number_cards": [
+  {
+   "label": "Confirmed Bills",
+   "number_card_name": "Confirmed Bills"
+  },
+  {
+   "label": "Confirmed Spend",
+   "number_card_name": "Confirmed Spend"
+  },
+  {
+   "label": "Petty Cash Balance",
+   "number_card_name": "Petty Cash Balance"
+  }
+ ],
+ "charts": [
+  {
+   "chart_name": "Confirmed Spend by Month",
+   "label": "Confirmed Spend by Month"
+  },
+  {
+   "chart_name": "Confirmed Spend by Category",
+   "label": "Confirmed Spend by Category"
+  }
+ ],
+ "shortcuts": [
+  {
+   "label": "Claims to Approve",
+   "link_to": "Reimbursement Claim",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Orange",
+   "stats_filter": "{\"docstatus\": 0}"
+  },
+  {
+   "label": "Petty Cash",
+   "link_to": "Petty Cash Withdrawal",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Capital Contributions List",
+   "link_to": "Capital Contribution",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Capitalizations",
+   "link_to": "Capitalization",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Blue"
+  },
+  {
+   "label": "Payees",
+   "link_to": "Payee",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "GST Purchase Register",
+   "link_to": "GST Purchase Register",
+   "type": "Report",
+   "color": "Green",
+   "report_ref_doctype": "Bill"
+  },
+  {
+   "label": "Reimbursement Voucher",
+   "link_to": "Reimbursement Voucher",
+   "type": "Report",
+   "color": "Green",
+   "report_ref_doctype": "Reimbursement Claim"
+  },
+  {
+   "label": "Capital Contributions Report",
+   "link_to": "Capital Contributions",
+   "type": "Report",
+   "color": "Green",
+   "report_ref_doctype": "Capital Contribution"
+  },
+  {
+   "label": "Expenses by Category",
+   "link_to": "Expenses by Category",
+   "type": "Report",
+   "color": "Green",
+   "report_ref_doctype": "Bill"
+  },
+  {
+   "label": "Asset Register",
+   "link_to": "Fixed Asset Register",
+   "type": "Report",
+   "color": "Green",
+   "report_ref_doctype": "Asset"
+  },
+  {
+   "label": "Expense Categories",
+   "link_to": "Expense Category",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Vendor Rules",
+   "link_to": "Vendor Category Rule",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Journal Entry",
+   "link_to": "Journal Entry",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Payment Entry",
+   "link_to": "Payment Entry",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Purchase Invoice",
+   "link_to": "Purchase Invoice",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Chart of Accounts",
+   "link_to": "Account",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Cost Centers",
+   "link_to": "Cost Center",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Assets",
+   "link_to": "Asset",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Company",
+   "link_to": "Company",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Users",
+   "link_to": "User",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Grey"
+  },
+  {
+   "label": "Settings & Upgrade",
+   "link_to": "Expense Ledger Settings",
+   "type": "DocType",
+   "doctype_view": "List",
+   "color": "Red"
+  }
+ ],
+ "roles": [
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Expense Accountant"
+  }
+ ]
+}

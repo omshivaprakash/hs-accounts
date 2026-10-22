@@ -117,9 +117,8 @@ services:
       - "8080:8080"
     depends_on: [backend, websocket]
 
-  watcher:
+  watcher:  # also serves the Drop a Bill page (port 8090, internal only)
     <<: *ingest
-    profiles: [ingest]
     command: [python, -m, ingestion.watcher]
 
   bot:

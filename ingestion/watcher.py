@@ -1,10 +1,11 @@
 """Polls the inbox folder and ingests new bills. Files move to processed/ or failed/, never deleted."""
 import shutil
+import threading
 import time
 
 import requests
 
-from . import pipeline, telegram
+from . import pipeline, server, telegram
 from .client import Frappe
 
 EXT = {".pdf", ".png", ".jpg", ".jpeg", ".webp"}
@@ -39,6 +40,7 @@ def scan(client):
 def main():
     client = Frappe.from_env()
     pipeline.INBOX.mkdir(exist_ok=True)
+    threading.Thread(target=server.serve, args=(client,), daemon=True).start()  # serves the Drop a Bill page
     print(f"watching {pipeline.INBOX.resolve()}", flush=True)
     while True:
         scan(client)

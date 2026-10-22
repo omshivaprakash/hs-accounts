@@ -231,7 +231,7 @@
    "fieldname": "source",
    "fieldtype": "Select",
    "label": "Source",
-   "options": "\nDrop Folder\nTelegram\nEmail\nManual"
+   "options": "\nUpload\nDrop Folder\nTelegram\nEmail\nManual"
   },
   {
    "fieldname": "source_file",

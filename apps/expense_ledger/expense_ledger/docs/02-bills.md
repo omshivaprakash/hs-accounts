@@ -4,6 +4,7 @@ A **Bill** is one invoice or receipt. It starts as a draft, and **submitting it 
 
 ## How bills arrive
 
+- **Drop a Bill (easiest):** open **Drop a Bill** from the Expense Ledger home. Drag in one or more invoices or receipts, or click to choose files or take a photo on a phone. Each file is read at once and shows the vendor, date and total. Pick who paid, how it was paid and the category, then **Save**. A manager can press **Confirm** straight away. If a card says *Check the details*, open the full form and correct it first.
 - **Drop folder:** put PDFs or photos in the `inbox` folder on the machine running the system. Each file is read, a draft bill is created, and the file moves to `inbox/processed`. Files that could not be read move to `inbox/failed`. Nothing is ever deleted.
 - **Telegram:** send a PDF or photo to the bot. It replies with what it found and three buttons: **Business**, **Spam**, **Trash**. Only chats on the allowed list are served.
 - **By hand:** open the Bills list and choose New.

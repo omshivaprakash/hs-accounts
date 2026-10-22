@@ -1,0 +1,20 @@
+{
+ "creation": "2026-10-22 08:30:00.000000",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2026-10-22 08:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Expense Ledger",
+ "name": "drop-bill",
+ "owner": "Administrator",
+ "page_name": "drop-bill",
+ "roles": [
+  {"role": "Accounts User"},
+  {"role": "Accounts Manager"},
+  {"role": "System Manager"}
+ ],
+ "standard": "Yes",
+ "system_page": 0,
+ "title": "Drop a Bill"
+}

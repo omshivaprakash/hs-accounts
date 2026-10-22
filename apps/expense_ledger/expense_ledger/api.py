@@ -1,5 +1,9 @@
 """Whitelisted actions behind the list-view buttons: batch claims, mark paid, Tally export."""
+import os
+from urllib.parse import quote
+
 import frappe
+import requests
 from frappe import _
 from frappe.utils import get_first_day, get_last_day, getdate
 
@@ -7,6 +11,9 @@ from expense_ledger import tally_xml, utils
 
 PERSONAL_MODES = ("Personal Card", "Personal UPI")
 MANAGERS = ("System Manager", "Accounts Manager")
+USERS = MANAGERS + ("Accounts User",)
+INGEST_URL = os.environ.get("INGEST_URL", "http://watcher:8090/ingest")  # the ingestion service, see ingestion/server.py
+CARD = ["name", "vendor", "invoice_no", "bill_date", "grand_total", "paid_by", "payment_mode", "expense_category", "needs_review", "docstatus"]
 
 
 @frappe.whitelist()
@@ -73,3 +80,46 @@ def export_tally(from_date, to_date, kind="Vouchers", entity=None):
     frappe.response.filename = f"tally-{'masters' if kind.startswith('Ledger') else 'vouchers'}-{from_date}-to-{to_date}.xml"
     frappe.response.filecontent = build(bills, cats, s.tally_company, gst).encode("utf-8")
     frappe.response.type = "download"
+
+
+def _card(name, **extra):
+    card = frappe.db.get_value("Bill", name, CARD, as_dict=True)
+    card.can_confirm = bool(set(frappe.get_roles()) & set(MANAGERS))
+    card.update(extra)
+    return card
+
+
+@frappe.whitelist(methods=["POST"])
+def drop_bill():
+    """One dropped invoice or receipt: OCR it, create the draft Bill, default Paid By to the uploader."""
+    frappe.only_for(USERS)
+    f = frappe.request.files.get("file")
+    if not f:
+        frappe.throw(_("No file received"))
+    try:
+        r = requests.post(INGEST_URL, data=f.stream.read(), headers={"X-Filename": quote(f.filename or "")}, timeout=180)
+    except requests.RequestException:
+        frappe.throw(_("The reader service is not running. Ask an administrator to start it."))
+    if not r.ok:
+        frappe.throw(_(r.json().get("error", "Could not read this file")))
+    res = r.json()
+    if res["duplicate"]:
+        return _card(res["name"], duplicate=True)
+    payee = frappe.db.get_value("Payee", {"user": frappe.session.user})
+    if payee:
+        frappe.db.set_value("Bill", res["name"], "paid_by", payee)
+    return _card(res["name"], duplicate=False, missing=res["missing"])
+
+
+@frappe.whitelist(methods=["POST"])
+def update_bill(name, payment_mode=None, paid_by=None, expense_category=None, confirm=0):
+    """Fill the three things OCR cannot know and optionally confirm (submit needs Accounts Manager)."""
+    frappe.only_for(USERS)
+    doc = frappe.get_doc("Bill", name)
+    if doc.docstatus != 0:
+        frappe.throw(_("{0} is already confirmed").format(name))
+    doc.update({k: v for k, v in dict(payment_mode=payment_mode, paid_by=paid_by, expense_category=expense_category).items() if v})
+    doc.save()
+    if int(confirm):
+        doc.submit()
+    return _card(name)
